@@ -119,7 +119,7 @@ public class IntentRecognizer {
     private Map<String, Object> llmRecognize(String message, List<Map<String, String>> history) {
         StringBuilder examples = new StringBuilder();
         TEMPLATES.forEach((intent, samples) ->
-                examples.append("消息: \"").append(samples.getFirst()).append("\" -> 意图: ")
+                examples.append("消息: \"").append(samples.get(0)).append("\" -> 意图: ")
                         .append(intent.name().toLowerCase(Locale.ROOT)).append('\n'));
         String prompt = """
                 你是客服意图分析专家。根据示例判断用户意图，返回 JSON。

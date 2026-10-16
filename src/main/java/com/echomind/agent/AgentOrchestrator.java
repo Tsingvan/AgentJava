@@ -194,8 +194,8 @@ public class AgentOrchestrator {
         List<Map.Entry<AgentType, Double>> ordered = availableScores.entrySet().stream()
                 .sorted(Map.Entry.<AgentType, Double>comparingByValue().reversed())
                 .toList();
-        AgentType primary = ordered.getFirst().getKey();
-        double primaryScore = ordered.getFirst().getValue();
+        AgentType primary = ordered.get(0).getKey();
+        double primaryScore = ordered.get(0).getValue();
         List<AgentType> supportingAgents = ordered.stream()
                 .skip(1)
                 .filter(entry -> entry.getKey() != AgentType.GENERAL)

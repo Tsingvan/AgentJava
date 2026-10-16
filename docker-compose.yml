@@ -34,17 +34,17 @@ services:
   echomind-java:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.runtime
     container_name: echomind-java-app
     ports:
       - "8080:8080"
     env_file:
       - .env
     environment:
-      - REDIS_HOST=redis
+      - REDIS_HOST=host.docker.internal
       - REDIS_PORT=6379
-      - CHROMA_HOST=http://chromadb
-      - CHROMA_PORT=8000
+      - CHROMA_HOST=http://host.docker.internal
+      - CHROMA_PORT=8001
       - ECHOMIND_DATA_DIR=/app/data/java
       - KNOWLEDGE_STORE_PATH=/app/data/java/knowledge-store.json
       - MEMORY_STORE_PATH=/app/data/java/memory-store.json
@@ -52,11 +52,6 @@ services:
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-anthropic}
     volumes:
       - app-data:/app/data
-    depends_on:
-      redis:
-        condition: service_healthy
-      chromadb:
-        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://localhost:8080/health || exit 1"]
       interval: 30s

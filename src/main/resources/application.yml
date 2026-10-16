@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: echomind-java
+  http:
+    client:
+      factory: simple
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:anthropic}
   jackson:

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +71,8 @@ public class RequestTraceStore {
             }
             items.add(trace);
         }
-        return items.reversed();
+        Collections.reverse(items);
+        return items;
     }
 
     public synchronized void clear() {
